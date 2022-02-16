@@ -5,7 +5,7 @@
   Time: 9:24 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="/view.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view.css">
 </head>
 <body>
 <br>
@@ -39,11 +39,13 @@
             </button>
         </td>
         <td class="search-file">
-            <form class="nav-link d-flex" style="margin: 0" action="/product?action=searchByName" method="post">
+            <form class="nav-link d-flex" style="margin: 0" action="${pageContext.request.contextPath}/product?action=searchByName" method="post">
                 <table>
                     <tr>
                         <td>
-                            <input class="form-control mr-2" type="text" size="25" placeholder="Search" name="search">
+                            <label>
+                                <input class="form-control mr-2" type="text" size="25" placeholder="Search" name="search">
+                            </label>
                         </td>
                         <td>
                             <button class="btn btn-light ml-2" type="submit">
@@ -81,6 +83,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <%--@elvariable id="products" type="java.util.List"--%>
                 <c:forEach items="${products}" var="product">
                     <tr>
                         <td>${product.getId_product()}</td>
@@ -92,15 +95,15 @@
                         <td>
                             <button type="button" class="btn btn-info">
                                 <a style="color: white; text-decoration: none"
-                                   href="/product?action=editGet&id=${product.getId_product()}"><i
+                                   href="${pageContext.request.contextPath}/product?action=editGet&id=${product.getId_product()}"><i
                                         class="fa-solid fa-pencil"></i></a>
                             </button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger">
                                 <a style="color: white; text-decoration: none"
-                                   href="/product?action=delete&id=${product.getId_product()}"><i
-                                        class="fa-solid fa-trash"></i></a>
+                                   href="${pageContext.request.contextPath}/product?action=delete&id=${product.getId_product()}"
+                                onclick="return confirm('Are you sure you want to Delete?')"><i class="fa-solid fa-trash"></i></a>
                             </button>
                         </td>
                     </tr>
@@ -109,7 +112,6 @@
             </table>
         </div>
     </div>
-
 </div>
 </body>
 </html>

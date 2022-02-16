@@ -18,16 +18,16 @@ public class ProductServlet extends HttpServlet {
     Validate validate = new Validate();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         action(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         action(request, response);
     }
 
-    private void action(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void action(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
